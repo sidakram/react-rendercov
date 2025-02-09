@@ -1,5 +1,0 @@
----
-"react-rendercov": patch
----
-
-Testing
