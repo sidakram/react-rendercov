@@ -35,12 +35,20 @@ const DEFAULT_OPTIONS: Options = {
 export default defineConfig([
     {
         ...DEFAULT_OPTIONS,
-        format: ['cjs', 'esm'],
-        entry: ['./src/index.ts', './src/playwright.ts'],
-        platform: 'node',
+        format: ['esm', 'cjs'],
+        entry: ['./src/index.ts'],
+        platform: 'browser',
         target: 'es2015',
         splitting: true,
         clean: true, // only run on first entry
+    },
+    {
+        ...DEFAULT_OPTIONS,
+        format: ['cjs'],
+        entry: ['./src/playwright.ts'],
+        platform: 'node',
+        target: 'es2015',
+        clean: true, // only run on
     },
     {
         ...DEFAULT_OPTIONS,
