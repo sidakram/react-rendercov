@@ -1,5 +1,11 @@
 # react-rendercov
 
+## 0.0.0-20250209194634
+
+### Patch Changes
+
+- 40c1e74: Fixing node imports for test
+
 ## 0.0.5
 
 ### Patch Changes
