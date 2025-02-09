@@ -1,5 +1,11 @@
 # react-rendercov
 
+## 0.0.5
+
+### Patch Changes
+
+- 92bf567: chore: added readme
+
 ## 0.0.4
 
 ### Patch Changes
