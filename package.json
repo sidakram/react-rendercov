@@ -1,0 +1,25 @@
+{
+  "name": "@react-rendercov/monorepo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publint": "npm run publint -w react-rendercov",
+    "build": "npm run build -w react-rendercov",
+    "lint": "npx biome lint --write",
+    "format": "npx biome format --write",
+    "check": "npx biome check --write",
+    "sherif": "sherif --fix",
+    "bump": "changeset && changeset version",
+    "release": "npm run build && changeset publish"
+  },
+  "private": true,
+  "packageManager": "npm@9.8.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@changesets/changelog-git": "^0.2.0",
+    "@changesets/cli": "^2.27.12",
+    "sherif": "^1.3.0"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "name": "react-rendercov",
+  "version": "0.0.2",
+  "description": "generate render coverage for react components using playwright",
+  "keywords": [
+    "playwright",
+    "react",
+    "react-render-coverage",
+    "fiber",
+    "internals"
+  ],
+  "bugs": {
+    "url": "https://github.com/sidakram/react-rendercov/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sidakram/react-rendercov.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Mohammad Akram",
+    "email": "markadm.dev@gmail.com"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "browser": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.global.js"
+      },
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/*": "./dist/*.js",
+    "./dist/*.cjs": "./dist/*.cjs",
+    "./dist/*.js": "./dist/*.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publint": "npx publint",
+    "build": "NODE_ENV=production tsup"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@swc/core": "^1.10.15",
+    "@types/node": "^22.13.1",
+    "publint": "^0.3.4",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "sidakram-bippy": "^0.2.24"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.45",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
