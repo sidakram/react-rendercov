@@ -1,6 +1,5 @@
 {
   "name": "@react-rendercov/monorepo",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publint": "npm run publint -w react-rendercov",
