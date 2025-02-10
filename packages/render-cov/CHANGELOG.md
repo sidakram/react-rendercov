@@ -1,5 +1,11 @@
 # react-rendercov
 
+## 0.0.0-20250210043555
+
+### Patch Changes
+
+- ac558cd: Fixed the destructuring issue
+
 ## 0.0.0-20250209194634
 
 ### Patch Changes
