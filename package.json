@@ -1,6 +1,5 @@
 {
   "name": "@react-rendercov/monorepo",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publint": "npm run publint -w react-rendercov",
@@ -10,7 +9,8 @@
     "check": "npx biome check --write",
     "sherif": "sherif --fix",
     "bump": "changeset && changeset version",
-    "release": "npm run build && changeset publish"
+    "release": "npm run build && changeset publish",
+    "release:snapshot": "npm run build && changeset publish --snapshot"
   },
   "private": true,
   "packageManager": "npm@9.8.1",
