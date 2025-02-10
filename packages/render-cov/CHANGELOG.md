@@ -1,5 +1,11 @@
 # react-rendercov
 
+## 0.0.0-20250210045824
+
+### Patch Changes
+
+- 5d6b618: fix another build
+
 ## 0.0.0-20250210044653
 
 ### Patch Changes
