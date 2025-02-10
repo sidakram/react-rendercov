@@ -1,0 +1,60 @@
+name: Release Snapshot
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Get Last Commit Message
+        id: check_commit
+        run: echo "LAST_COMMIT_MSG=$(git log -1 --pretty=%s)" >> $GITHUB_ENV
+
+      - name: Check Chore Commit
+        id: is_chore
+        run: |
+          if [[ "${{ env.LAST_COMMIT_MSG }}" == chore* ]]; then
+            echo "SKIP_PUBLISH=true" >> $GITHUB_ENV
+          else
+            echo "SKIP_PUBLISH=false" >> $GITHUB_ENV
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Version Bump
+        if: env.SKIP_PUBLISH == 'false'
+        run: |
+          echo "SNAPSHOT_TAG=pr${{ github.event.pull_request.number }}"
+          npx changeset version --snapshot $SNAPSHOT_TAG
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore(release): bump version"
+          git push origin HEAD:${{ github.head_ref }}
+
+      - name: Publish Snapshot
+        if: env.SKIP_PUBLISH == 'false'
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: npm run release:snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
