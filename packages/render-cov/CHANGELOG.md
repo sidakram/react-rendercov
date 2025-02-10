@@ -1,5 +1,11 @@
 # react-rendercov
 
+## 0.0.6
+
+### Patch Changes
+
+- f193df8: Fix build and type issues
+
 ## 0.0.5
 
 ### Patch Changes

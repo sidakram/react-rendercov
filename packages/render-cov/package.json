@@ -1,6 +1,6 @@
 {
   "name": "react-rendercov",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "generate render coverage for react components using playwright",
   "keywords": [
     "playwright",
