@@ -89,12 +89,13 @@ function instrumentRenderCov() {
 }
 
 export function initRenderCovPlaywright(_config: RenderCovConfig = {}) {
-    if (typeof window !== 'undefined') {
+    if (typeof window === 'undefined') {
         return;
     }
 
     if (__INIT__ === true) {
         __DEV__ && console.log('log.render cov already initialized');
+        return;
     }
 
     if (typeof _config === 'object') {
