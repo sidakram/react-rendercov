@@ -10,7 +10,7 @@
     "sherif": "sherif --fix",
     "bump": "changeset && changeset version",
     "release": "npm run build && changeset publish",
-    "release:snapshot": "npm run build && changeset publish --snapshot"
+    "release:snapshot": "npm run test && changeset publish --snapshot"
   },
   "private": true,
   "packageManager": "npm@9.8.1",

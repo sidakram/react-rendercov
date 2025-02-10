@@ -1,17 +1,36 @@
 // libs
 import fs from 'node:fs';
 import { writeFile } from 'node:fs/promises';
-// biome-ignore lint/correctness/noUnusedImports: this is being used
-import { test } from '@playwright/test';
 
-export function extendRenderCovTest<T extends typeof test>(
+// defs
+import type {
+    PlaywrightTestArgs,
+    PlaywrightTestOptions,
+    PlaywrightWorkerArgs,
+    PlaywrightWorkerOptions,
+    TestType,
+} from '@playwright/test';
+
+type TestArgs = PlaywrightTestArgs & PlaywrightTestOptions;
+type WorkerArgs = PlaywrightWorkerArgs & PlaywrightWorkerOptions;
+
+type ExtractTestOptions<T> = T extends TestType<infer P, infer _> ? P : object;
+type ExtractWorkerOptions<T> = T extends TestType<infer _, infer Q>
+    ? Q
+    : object;
+
+export function extendRenderCovTest<T extends TestType<TestArgs, WorkerArgs>>(
     test: T,
     config: {
         wait?: number;
     } = {
         wait: 500,
     },
-) {
+): TestType<
+    TestArgs & ExtractTestOptions<T>,
+    WorkerArgs & ExtractWorkerOptions<T>
+> {
+    // @ts-expect-error
     return test.extend({
         page: [
             async ({ page }, use, testInfo) => {

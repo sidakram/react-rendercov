@@ -19,7 +19,7 @@ const DEFAULT_OPTIONS: Options = {
     clean: false,
     outDir: './dist',
     splitting: false,
-    sourcemap: false,
+    sourcemap: true,
     format: [],
     target: 'esnext',
     treeshake: true,
@@ -47,7 +47,7 @@ export default defineConfig([
         format: ['cjs'],
         entry: ['./src/playwright.ts'],
         platform: 'node',
-        target: 'es2015',
+        target: 'es2017',
         clean: true, // only run on
     },
     {
