@@ -89,7 +89,7 @@ function instrumentRenderCov() {
 }
 
 export function initRenderCovPlaywright(_config: RenderCovConfig = {}) {
-    if (typeof window !== 'undefined') {
+    if (typeof window === 'undefined') {
         return;
     }
 

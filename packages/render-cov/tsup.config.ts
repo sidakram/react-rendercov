@@ -47,7 +47,7 @@ export default defineConfig([
         format: ['cjs'],
         entry: ['./src/playwright.ts'],
         platform: 'node',
-        target: 'es2017',
+        target: 'es2020',
         clean: true, // only run on
     },
     {
