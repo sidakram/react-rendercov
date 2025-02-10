@@ -24,7 +24,7 @@ const DEFAULT_OPTIONS: Options = {
     target: 'esnext',
     treeshake: true,
     dts: true,
-    minify: true,
+    minify: false,
     env: {
         NODE_ENV: process.env.NODE_ENV ?? 'development',
         VERSION: JSON.parse(fs.readFileSync('package.json', 'utf8')).version,

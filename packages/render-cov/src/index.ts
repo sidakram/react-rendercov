@@ -95,6 +95,7 @@ export function initRenderCovPlaywright(_config: RenderCovConfig = {}) {
 
     if (__INIT__ === true) {
         __DEV__ && console.log('log.render cov already initialized');
+        return;
     }
 
     if (typeof _config === 'object') {
