@@ -19,12 +19,12 @@ const DEFAULT_OPTIONS: Options = {
     clean: false,
     outDir: './dist',
     splitting: false,
-    sourcemap: false,
+    sourcemap: true,
     format: [],
     target: 'esnext',
     treeshake: true,
     dts: true,
-    minify: true,
+    minify: false,
     env: {
         NODE_ENV: process.env.NODE_ENV ?? 'development',
         VERSION: JSON.parse(fs.readFileSync('package.json', 'utf8')).version,
@@ -35,12 +35,20 @@ const DEFAULT_OPTIONS: Options = {
 export default defineConfig([
     {
         ...DEFAULT_OPTIONS,
-        format: ['cjs', 'esm'],
-        entry: ['./src/index.ts', './src/playwright.ts'],
-        platform: 'node',
+        format: ['esm', 'cjs'],
+        entry: ['./src/index.ts'],
+        platform: 'browser',
         target: 'es2015',
         splitting: true,
         clean: true, // only run on first entry
+    },
+    {
+        ...DEFAULT_OPTIONS,
+        format: ['cjs'],
+        entry: ['./src/playwright.ts'],
+        platform: 'node',
+        target: 'es2020',
+        clean: true, // only run on
     },
     {
         ...DEFAULT_OPTIONS,

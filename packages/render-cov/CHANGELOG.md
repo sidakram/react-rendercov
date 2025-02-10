@@ -1,5 +1,18 @@
 # react-rendercov
 
+## 0.0.0-20250210044653
+
+### Patch Changes
+
+- ac558cd: Fixed the destructuring issue
+- 949d037: Don't minify
+
+## 0.0.0-20250209194634
+
+### Patch Changes
+
+- 40c1e74: Fixing node imports for test
+
 ## 0.0.5
 
 ### Patch Changes
