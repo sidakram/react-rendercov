@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  @apply text-4xl font-bold;
+}
+
+@utility local-btn-prim {
+  @apply rounded-lg border font-semibold py-1 px-4 mb-1  border-slate-800 cursor-pointer transition-all;
+
+  @variant active {
+    @apply bg-indigo-100
+  }
+
+  @variant hover {
+    @apply border-indigo-700;
+  }
+
+  @variant focus {
+    @apply outline-offset-1;
+  }
+
+  @variant focus-visible {
+    @apply outline-offset-1;
+  }
+}
