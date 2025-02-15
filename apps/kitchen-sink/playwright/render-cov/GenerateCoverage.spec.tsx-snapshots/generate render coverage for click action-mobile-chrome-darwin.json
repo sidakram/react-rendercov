@@ -1,0 +1,182 @@
+{
+  "BlankTest.tsx_MemoText": {
+    "1": {
+      "phase": "mount",
+      "componentName": "MemoText",
+      "count": 2
+    }
+  },
+  "LevelFive.tsx_LevelFive": {
+    "1": {
+      "phase": "mount",
+      "componentName": "LevelFive",
+      "count": 2
+    }
+  },
+  "LevelFour.tsx_LevelFour": {
+    "1": {
+      "phase": "mount",
+      "componentName": "LevelFour",
+      "count": 2
+    }
+  },
+  "LevelFour.tsx_LevelFourChildOne": {
+    "1": {
+      "phase": "mount",
+      "componentName": "LevelFourChildOne",
+      "count": 2
+    }
+  },
+  "LevelOne.tsx_LevelOne": {
+    "1": {
+      "phase": "mount",
+      "componentName": "LevelOne",
+      "count": 2
+    },
+    "2": {
+      "phase": "update",
+      "componentName": "LevelOne",
+      "count": 2
+    }
+  },
+  "LevelThree.tsx_LevelThree": {
+    "1": {
+      "phase": "mount",
+      "componentName": "LevelThree",
+      "count": 2
+    }
+  },
+  "LevelTwo.tsx_LevelTwo": {
+    "1": {
+      "phase": "mount",
+      "componentName": "LevelTwo",
+      "count": 2
+    }
+  },
+  "MemoText.tsx_MemoText": {
+    "1": {
+      "phase": "mount",
+      "componentName": "MemoText",
+      "count": 4
+    }
+  },
+  "_IndexRoute": {
+    "1": {
+      "phase": "mount",
+      "componentName": "IndexRoute",
+      "count": 2
+    }
+  },
+  "_RemixErrorBoundary": {
+    "1": {
+      "phase": "mount",
+      "componentName": "RemixErrorBoundary",
+      "count": 2
+    }
+  },
+  "_RenderErrorBoundary": {
+    "1": {
+      "phase": "mount",
+      "componentName": "RenderErrorBoundary",
+      "count": 2
+    }
+  },
+  "_RouterProvider2": {
+    "1": {
+      "phase": "mount",
+      "componentName": "RouterProvider2",
+      "count": 2
+    }
+  },
+  "root.tsx_App": {
+    "1": {
+      "phase": "mount",
+      "componentName": "App",
+      "count": 2
+    }
+  },
+  "root.tsx_Layout": {
+    "1": {
+      "phase": "mount",
+      "componentName": "Layout",
+      "count": 2
+    }
+  },
+  "v=2c74b105_DataRoutes": {
+    "1": {
+      "phase": "mount",
+      "componentName": "DataRoutes",
+      "count": 2
+    }
+  },
+  "v=2c74b105_HydratedRouter": {
+    "1": {
+      "phase": "mount",
+      "componentName": "HydratedRouter",
+      "count": 2
+    }
+  },
+  "v=2c74b105_Links": {
+    "1": {
+      "phase": "mount",
+      "componentName": "Links",
+      "count": 2
+    }
+  },
+  "v=2c74b105_Meta": {
+    "1": {
+      "phase": "mount",
+      "componentName": "Meta",
+      "count": 2
+    }
+  },
+  "v=2c74b105_Outlet": {
+    "1": {
+      "phase": "mount",
+      "componentName": "Outlet",
+      "count": 2
+    }
+  },
+  "v=2c74b105_RenderedRoute": {
+    "1": {
+      "phase": "mount",
+      "componentName": "RenderedRoute",
+      "count": 4
+    }
+  },
+  "v=2c74b105_Router": {
+    "1": {
+      "phase": "mount",
+      "componentName": "Router",
+      "count": 2
+    }
+  },
+  "v=2c74b105_RouterProvider": {
+    "1": {
+      "phase": "mount",
+      "componentName": "RouterProvider",
+      "count": 2
+    }
+  },
+  "v=2c74b105_Scripts": {
+    "1": {
+      "phase": "mount",
+      "componentName": "Scripts",
+      "count": 2
+    }
+  },
+  "v=2c74b105_ScrollRestoration": {
+    "1": {
+      "phase": "mount",
+      "componentName": "ScrollRestoration",
+      "count": 2
+    }
+  },
+  "with-props_Wrapped": {
+    "1": {
+      "phase": "mount",
+      "componentName": "Wrapped",
+      "count": 4
+    }
+  }
+}

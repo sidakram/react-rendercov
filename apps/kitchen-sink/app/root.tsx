@@ -1,3 +1,7 @@
+// should be at the top of react
+import { initRenderCovPlaywright } from "react-rendercov";
+initRenderCovPlaywright();
+
 // libs
 import {
     isRouteErrorResponse,

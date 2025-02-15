@@ -50,13 +50,4 @@ export default defineConfig([
         target: 'es2020',
         clean: true, // only run on
     },
-    {
-        ...DEFAULT_OPTIONS,
-        format: ['iife'],
-        entry: ['./src/index.ts'],
-        platform: 'browser',
-        target: 'es2015',
-        splitting: true,
-        clean: true, // only run on first entry
-    },
 ]);

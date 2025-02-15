@@ -29,10 +29,6 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "browser": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.global.js"
-      },
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
@@ -50,8 +46,9 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publint": "npx publint",
-    "build": "NODE_ENV=production tsup"
+    "build": "NODE_ENV=production tsup",
+    "dev": "NODE_ENV=development tsup --watch",
+    "publint": "npx publint"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
