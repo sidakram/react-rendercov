@@ -41,8 +41,7 @@ jobs:
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
-          echo "SNAPSHOT_TAG=pr${{ github.event.pull_request.number }}"
-          npx changeset version --snapshot $SNAPSHOT_TAG
+          npm run version-packages -- --snapshot "pr${{ github.event.pull_request.number }}"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
