@@ -22,7 +22,7 @@ jobs:
         run: echo "LAST_COMMIT_MSG=$(git log -1 --pretty=%s)" >> $GITHUB_ENV
 
       - name: Check Chore Commit
-        id: is_chore
+        id: check-chore-commit
         run: |
           if [[ "${{ env.LAST_COMMIT_MSG }}" == chore* ]]; then
             echo "SKIP_PUBLISH=true" >> $GITHUB_ENV
@@ -36,12 +36,13 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
+        if: env.SKIP_PUBLISH == 'false'
         run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
-          npm run version-packages -- --snapshot "pr${{ github.event.pull_request.number }}"
+          npm run version-packages -- --snapshot pr${{ github.event.pull_request.number }}
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
