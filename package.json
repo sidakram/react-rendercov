@@ -2,17 +2,23 @@
   "name": "@react-rendercov/monorepo",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publint": "npm run publint -w react-rendercov",
-    "build": "npm run build -w react-rendercov",
+    "publint:rcov": "turbo run publint --filter=react-rendercov",
+    "build": "turbo run build",
+    "build:rcov": "turbo run build --filter=react-rendercov",
     "lint": "npx biome lint --write",
     "format": "npx biome format --write",
     "check": "npx biome check --write",
     "sherif": "sherif --fix",
-    "bump": "changeset && changeset version",
-    "release": "npm run build && changeset publish",
-    "release:snapshot": "npm run build && changeset publish --snapshot"
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf",
+    "version-packages": "changeset version",
+    "release": "npm run build:rcov && changeset publish",
+    "release:snapshot": "npm run build:rcov && changeset publish --snapshot",
+    "changeset": "changeset"
   },
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "packageManager": "npm@9.8.1",
   "workspaces": [
     "packages/*"
@@ -20,6 +26,7 @@
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
     "@changesets/cli": "^2.27.12",
-    "sherif": "^1.3.0"
+    "sherif": "^1.3.0",
+    "turbo": "^2.4.2"
   }
 }

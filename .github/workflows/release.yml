@@ -40,7 +40,7 @@ jobs:
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
-          npx changeset version 
+          npm run version-packages 
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
