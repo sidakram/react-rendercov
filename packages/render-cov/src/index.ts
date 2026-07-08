@@ -7,6 +7,7 @@ import {
   installRDTHook,
   instrument,
   isCompositeFiber,
+  Fiber,
 } from "bippy";
 
 import {
@@ -28,54 +29,50 @@ let __INIT__ = false;
 let config: RenderCovConfig;
 
 function initCountScanner(coverageHash: Map<string, RenderCoverageHash>) {
-  const visitor = createFiberVisitor({
-    onRender(fiber, phase) {
-      const type = getType(fiber.type);
-      if (!type) return;
-
-      if (!isCompositeFiber(fiber)) {
-        return;
-      }
-
-      const { selfTime } = getTimings(fiber);
-      const displayName = getDisplayName(type);
-
-      if (!isWhitelistedComponent(displayName, config)) {
-        return;
-      }
-
-      const dispatcherRef = getDispatcherRef();
-      const reference = $$__REACT_INTERNALS__.describeFiber(
-        fiber,
-        dispatcherRef
-      );
-      const exactFileName = extractFileName(reference);
-
-      if (!isWhitelistedPath(exactFileName, config)) {
-        return;
-      }
-
-      const render: Render = {
-        phase,
-        componentName: displayName,
-        count: 1,
-        time: selfTime,
-        reference,
-        fileName: exactFileName,
-        uid: `${exactFileName}_${displayName}`,
-      };
-
-      updateRenderCount(coverageHash, render);
-    },
-    onError: function onError() {
-      return void 0;
-    },
-  });
-
   instrument({
     name: "bippy-render-cov-playwright",
-    onCommitFiberRoot(rendererID, root) {
-      visitor(rendererID, root);
+    onCommitFiberRoot(_rendererID, root) {
+      traverseRenderedFibers(
+        root.current,
+        (fiber: Fiber, phase: "mount" | "update" | "unmount") => {
+          const type = getType(fiber.type);
+          if (!type) return;
+
+          if (!isCompositeFiber(fiber)) {
+            return;
+          }
+
+          const { selfTime } = getTimings(fiber);
+          const displayName = getDisplayName(type);
+
+          if (!isWhitelistedComponent(displayName, config)) {
+            return;
+          }
+
+          const dispatcherRef = getDispatcherRef();
+          const reference = $$__REACT_INTERNALS__.describeFiber(
+            fiber,
+            dispatcherRef
+          );
+          const exactFileName = extractFileName(reference);
+
+          if (!isWhitelistedPath(exactFileName, config)) {
+            return;
+          }
+
+          const render: Render = {
+            phase,
+            componentName: displayName,
+            count: 1,
+            time: selfTime,
+            reference,
+            fileName: exactFileName,
+            uid: `${exactFileName}_${displayName}`,
+          };
+
+          updateRenderCount(coverageHash, render);
+        }
+      );
     },
   });
 }
