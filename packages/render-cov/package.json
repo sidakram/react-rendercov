@@ -62,7 +62,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "sidakram-bippy": "^0.2.24"
+    "bippy": "^0.5.43"
   },
   "peerDependencies": {
     "@playwright/test": "^1.45",
