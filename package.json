@@ -31,8 +31,8 @@
   },
   "allowScripts": {
     "@biomejs/biome@1.9.4": true,
-    "@swc/core@1.10.15": true,
-    "esbuild@0.24.2": true,
-    "fsevents@2.3.2": true
+    "fsevents@2.3.2": true,
+    "@swc/core@1.15.43": true,
+    "esbuild@0.27.7": true
   }
 }
