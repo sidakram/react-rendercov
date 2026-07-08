@@ -1,4 +1,4 @@
-import type { RouteConfig } from '@react-router/dev/routes';
-import createRoutes from './routes/index';
+import type { RouteConfig } from "@react-router/dev/routes";
+import createRoutes from "./routes/index";
 
-export default [...createRoutes('/routes')] satisfies RouteConfig;
+export default [...createRoutes("/routes")] satisfies RouteConfig;
