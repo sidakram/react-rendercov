@@ -28,5 +28,11 @@
     "@changesets/cli": "^2.27.12",
     "sherif": "^1.3.0",
     "turbo": "^2.4.2"
+  },
+  "allowScripts": {
+    "@biomejs/biome@1.9.4": true,
+    "@swc/core@1.10.15": true,
+    "esbuild@0.24.2": true,
+    "fsevents@2.3.2": true
   }
 }
