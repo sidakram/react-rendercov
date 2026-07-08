@@ -38,6 +38,16 @@ function initCountScanner(coverageHash: Map<string, RenderCoverageHash>) {
           const type = getType(fiber.type);
           if (!type) return;
 
+          // @ts-expect-error - renderCovName is injected manually at function definition level
+          const renderCovComponentName: string | undefined = type.renderCovName;
+
+          if (
+            !config.disableCustomNamesCheck &&
+            typeof renderCovComponentName === "undefined"
+          ) {
+            return;
+          }
+
           if (!isCompositeFiber(fiber)) {
             return;
           }
@@ -67,7 +77,7 @@ function initCountScanner(coverageHash: Map<string, RenderCoverageHash>) {
             time: selfTime,
             reference,
             fileName: exactFileName,
-            uid: `${exactFileName}_${displayName}`,
+            uid: renderCovComponentName ?? `${exactFileName}_${displayName}`,
           };
 
           updateRenderCount(coverageHash, render);

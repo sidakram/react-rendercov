@@ -26,4 +26,6 @@ function LevelFive({ children }: PropsWithChildren) {
   );
 }
 
+LevelFive.renderCovName = "LevelFiveAkram";
+
 export default LevelFive;

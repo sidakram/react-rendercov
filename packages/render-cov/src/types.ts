@@ -1,5 +1,5 @@
 // libs
-import type { Fiber, ReactRenderer } from "sidakram-bippy";
+import type { Fiber, ReactRenderer } from "bippy";
 
 export type ReactInternals = {
   disabledDepth: number;
@@ -115,4 +115,10 @@ export type RenderCovConfig = {
    * @default false
    */
   ignoreEmptyComponents?: boolean;
+
+  /**
+   * By default it runs render-cov only on components whose custom name is defined
+   * @default false
+   */
+  disableCustomNamesCheck?: boolean;
 };
