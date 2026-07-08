@@ -104,3 +104,7 @@ export function initRenderCovPlaywright(_config: RenderCovConfig = {}) {
   // Initialize React Render Coverage
   instrumentRenderCov();
 }
+
+export default {
+  initRenderCovPlaywright,
+};

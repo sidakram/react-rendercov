@@ -21,6 +21,7 @@
   },
   "packageManager": "npm@9.8.1",
   "workspaces": [
+    "apps/*",
     "packages/*"
   ],
   "devDependencies": {
@@ -31,8 +32,8 @@
   },
   "allowScripts": {
     "@biomejs/biome@1.9.4": true,
-    "fsevents@2.3.2": true,
     "@swc/core@1.15.43": true,
-    "esbuild@0.27.7": true
+    "esbuild@0.21.5": true,
+    "fsevents@2.3.3": true
   }
 }

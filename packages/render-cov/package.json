@@ -27,19 +27,17 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
-      "browser": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.global.js"
-      },
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
-    "./dist/*": "./dist/*.js",
-    "./dist/*.cjs": "./dist/*.cjs",
-    "./dist/*.js": "./dist/*.js",
-    "./dist/playwright": "./dist/playwright.cjs"
+    "./playwright": {
+      "types": "./dist/playwright.d.mts",
+      "import": "./dist/playwright.mjs",
+      "default": "./dist/playwright.mjs"
+    }
   },
   "files": [
     "dist",
@@ -51,7 +49,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publint": "npx publint",
-    "build": "NODE_ENV=production tsdown"
+    "build": "NODE_ENV=production tsdown",
+    "dev": "NODE_ENV=development tsdown --watch"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
