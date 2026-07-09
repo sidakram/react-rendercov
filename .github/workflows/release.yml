@@ -39,7 +39,6 @@ jobs:
         with:
           node-version: 24
           registry-url: "https://registry.npmjs.org"
-          scope: "@sidakram"
 
       - name: Generate .npmrc
         run: make create-npmrc
@@ -47,10 +46,6 @@ jobs:
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
         run: npm ci
-
-      - name: Build Package
-        if: env.SKIP_PUBLISH == 'false'
-        run: npm run build --workspace=react-rendercov
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
@@ -62,14 +57,26 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "chore(release): bump version"
-          git push origin main
 
-      - name: Push Version Changes
-        run: git push origin main --tags
+      - name: Build Package
+        if: env.SKIP_PUBLISH == 'false'
+        run: npm run build --workspace=react-rendercov
+
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./packages/render-cov/package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Publish to npm
         if: env.SKIP_PUBLISH == 'false'
         id: publish
-        run: npm publish --access public --provenance --workspace=react-rendercov --no-package-lock
+        run: npm publish --access public --provenance --workspace=react-rendercov
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create tag and push
+        run: |
+          git tag v${{ steps.version.outputs.version }}
+          git push origin v${{ steps.version.outputs.version }}
+          git push origin HEAD:${{ github.head_ref }}
