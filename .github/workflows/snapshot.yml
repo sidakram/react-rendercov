@@ -16,6 +16,10 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'publish')
     runs-on: ubuntu-latest
 
+    permissions:
+        contents: write
+        packages: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v6
@@ -56,6 +60,6 @@ jobs:
 
       - name: Publish Snapshot
         id: publish
-        run: npm publish --tag dev --provenance --registry https://npm.pkg.github.com --no-package-lock
+        run: npm publish --tag dev --registry https://npm.pkg.github.com --no-package-lock --workspace=react-rendercov
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
