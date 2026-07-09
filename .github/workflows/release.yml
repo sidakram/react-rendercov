@@ -32,7 +32,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           registry-url: 'https://npmjs.org'
 
       - name: Install Dependencies
@@ -41,6 +41,7 @@ jobs:
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
+          git pull origin main --rebase
           npm run version-packages
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"

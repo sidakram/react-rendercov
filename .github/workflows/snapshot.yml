@@ -36,7 +36,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
@@ -45,6 +45,7 @@ jobs:
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
+          git pull origin HEAD:${{ github.head_ref }} --rebase
           npm version prerelease --preid=pr${{ github.event.pull_request.number }} --no-git-tag-version
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
