@@ -55,7 +55,7 @@ jobs:
         run: |
           git fetch origin ${{ github.head_ref }}
           git rebase origin/${{ github.head_ref }}
-          npm version prerelease --preid=pr${{ github.event.pull_request.number }} --no-git-tag-version --workspace=@sidakram/react-rendercov
+          npm version prerelease --preid=pr${{ github.event.pull_request.number }} --no-git-tag-version --workspace=react-rendercov
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
@@ -63,7 +63,7 @@ jobs:
 
       - name: Build Package
         if: env.SKIP_PUBLISH == 'false'
-        run: npm run build --workspace=@sidakram/react-rendercov
+        run: npm run build --workspace=react-rendercov
 
       - name: Read version
         id: version
@@ -73,7 +73,7 @@ jobs:
 
       - name: Publish Snapshot
         id: publish
-        run: npm publish --tag dev --workspace=@sidakram/react-rendercov --access public
+        run: npm publish --tag dev --workspace=react-rendercov --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
