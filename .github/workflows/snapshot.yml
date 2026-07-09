@@ -37,8 +37,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: 'https://github.com'
-
 
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
@@ -56,6 +54,6 @@ jobs:
 
       - name: Publish Snapshot
         id: publish
-        run: npm publish --scope=@${{ github.repository_owner }} --tag dev --provenance
+        run: npm publish --scope=@${{ github.repository_owner }} --tag dev --provenance --registry https://github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
