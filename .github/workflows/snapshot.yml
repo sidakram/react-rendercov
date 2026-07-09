@@ -42,7 +42,7 @@ jobs:
 
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
-        run: npm ci --prefer-offline --no-audit --no-fund
+        run: npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
