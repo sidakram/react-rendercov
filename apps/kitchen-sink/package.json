@@ -1,6 +1,5 @@
 {
   "name": "kitchen-sink",
-  "private": true,
   "type": "module",
   "scripts": {
     "build": "react-router build",

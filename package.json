@@ -11,7 +11,6 @@
     "sherif": "sherif --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf"
   },
-  "private": true,
   "engines": {
     "node": ">=18"
   },
