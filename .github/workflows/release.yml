@@ -43,7 +43,7 @@ jobs:
         run: |
           git fetch origin main
           git rebase origin/main
-          npm run version-packages
+          npm version minor --workspace=react-rendercov
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
