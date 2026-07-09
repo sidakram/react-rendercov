@@ -68,7 +68,7 @@ jobs:
       - name: Read version
         id: version
         run: |
-          VERSION=$(npm pkg get version --workspace=@sidakram/react-rendercov | tr -d '"')
+          VERSION=$(node -p "require('./packages/react-rendercov/package.json').version")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Publish Snapshot
