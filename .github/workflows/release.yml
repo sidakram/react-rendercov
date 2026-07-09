@@ -33,15 +33,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: 'https://npmjs.org'
+          registry-url: 'https://registery.npmjs.org'
 
       - name: Install Dependencies
-        run: npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
-          git pull origin main --rebase
+          git fetch origin main
+          git rebase origin/main
           npm run version-packages
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -55,7 +56,7 @@ jobs:
       - name: Publish to npm
         if: env.SKIP_PUBLISH == 'false'
         id: publish
-        run: npm publish --scope=@${{ github.repository_owner }} --access public --provenance
+        run: npm publish --access public --provenance
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

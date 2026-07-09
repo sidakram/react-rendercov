@@ -40,7 +40,7 @@ jobs:
 
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
-        run: npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps
+        run: npm ci --prefer-offline --no-audit --no-fund
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
@@ -56,6 +56,6 @@ jobs:
 
       - name: Publish Snapshot
         id: publish
-        run: npm publish --scope=@${{ github.repository_owner }} --tag dev --provenance --registry https://github.com
+        run: npm publish --tag dev --provenance --registry https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
