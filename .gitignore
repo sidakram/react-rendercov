@@ -131,3 +131,5 @@ dist
 
 # turbo
 .turbo
+
+.npmrc

@@ -44,6 +44,9 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@sidakram'
 
+      - name: Generate .npmrc
+        run: make create-npmrc
+
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
         run: npm ci
