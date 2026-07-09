@@ -29,9 +29,5 @@
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
-  },
-  "allowScripts": {
-    "fsevents@2.3.2": true,
-    "fsevents@2.3.3": true
   }
 }
