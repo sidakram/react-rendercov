@@ -35,15 +35,23 @@ jobs:
           node-version: 24
           registry-url: 'https://registery.npmjs.org'
 
+      - name: Generate .npmrc
+        run: make create-npmrc
+
       - name: Install Dependencies
-        run: npm ci --prefer-offline --no-audit --no-fund
+        if: env.SKIP_PUBLISH == 'false'
+        run: npm ci
+
+      - name: Build Package
+        if: env.SKIP_PUBLISH == 'false'
+        run: npm run build --workspace=@sidakram/react-rendercov
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
           git fetch origin main
           git rebase origin/main
-          npm version minor --workspace=react-rendercov
+          npm version minor --workspace=@sidakram/react-rendercov
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
@@ -56,7 +64,6 @@ jobs:
       - name: Publish to npm
         if: env.SKIP_PUBLISH == 'false'
         id: publish
-        run: npm publish --access public --provenance
+        run: npm publish --access public --provenance --workspace=@sidakram/react-rendercov --no-package-lock
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
