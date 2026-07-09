@@ -72,4 +72,4 @@ jobs:
         id: publish
         run: npm publish --access public --provenance --workspace=@sidakram/react-rendercov --no-package-lock
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
