@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-        contents: write
-        packages: write
-        id-token: write
+      contents: write
+      packages: write
+      id-token: write
 
     steps:
       - name: Checkout Code
@@ -38,8 +38,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@sidakram'
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@sidakram"
 
       - name: Generate .npmrc
         run: make create-npmrc
