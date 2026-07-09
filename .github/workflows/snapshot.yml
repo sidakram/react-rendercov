@@ -73,7 +73,7 @@ jobs:
 
       - name: Publish Snapshot
         id: publish
-        run: npm publish --tag dev --workspace=@sidakram/react-rendercov
+        run: npm publish --tag dev --workspace=@sidakram/react-rendercov --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
