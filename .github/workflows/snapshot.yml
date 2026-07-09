@@ -56,6 +56,6 @@ jobs:
 
       - name: Publish Snapshot
         id: publish
-        run: npm publish --tag dev --provenance --registry https://npm.pkg.github.com
+        run: npm publish --tag dev --provenance --registry https://npm.pkg.github.com --no-package-lock
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
