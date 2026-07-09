@@ -27,19 +27,17 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
-      "browser": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.global.js"
-      },
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
-    "./dist/*": "./dist/*.js",
-    "./dist/*.cjs": "./dist/*.cjs",
-    "./dist/*.js": "./dist/*.js",
-    "./dist/playwright": "./dist/playwright.cjs"
+    "./playwright": {
+      "types": "./dist/playwright.d.mts",
+      "import": "./dist/playwright.mjs",
+      "default": "./dist/playwright.mjs"
+    }
   },
   "files": [
     "dist",
@@ -51,23 +49,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "publint": "npx publint",
-    "build": "NODE_ENV=production tsup"
+    "build": "NODE_ENV=production tsdown",
+    "dev": "NODE_ENV=development tsdown --watch"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@swc/core": "^1.10.15",
-    "@types/node": "^22.13.1",
+    "@types/node": "^22.20.1",
     "publint": "^0.3.4",
-    "tsup": "^8.3.6",
+    "tsdown": "^0.22.4",
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "sidakram-bippy": "^0.2.24"
+    "bippy": "^0.5.43"
   },
   "peerDependencies": {
     "@playwright/test": "^1.45",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": ">=17.0.1",
+    "react-dom": ">=17.0.1"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

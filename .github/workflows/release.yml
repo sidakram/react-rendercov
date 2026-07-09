@@ -11,7 +11,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-  
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -32,27 +32,30 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+          registry-url: 'https://npmjs.org'
 
       - name: Install Dependencies
-        run: npm ci --prefer-offline --no-audit --no-fund
+        run: npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
-          npm run version-packages 
+          git pull origin main --rebase
+          npm run version-packages
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "chore(release): bump version"
           git push origin main
 
+      - name: Push Version Changes
+        run: git push origin main --tags
+
       - name: Publish to npm
         if: env.SKIP_PUBLISH == 'false'
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          publish: npm run release
+        id: publish
+        run: npm publish --scope=@${{ github.repository_owner }} --access public --provenance
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

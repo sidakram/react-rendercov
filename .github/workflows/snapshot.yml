@@ -5,17 +5,20 @@ on:
     types:
       - opened
       - synchronize
+      - labeled
+
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
     name: Release
+    if: contains(github.event.pull_request.labels.*.name, 'publish')
     runs-on: ubuntu-latest
-  
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Get Last Commit Message
         id: check_commit
@@ -33,16 +36,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
-        run: npm ci --prefer-offline --no-audit --no-fund
+        run: npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
-          npm run version-packages -- --snapshot pr${{ github.event.pull_request.number }}
+          git pull origin HEAD:${{ github.head_ref }} --rebase
+          npm version prerelease --preid=pr${{ github.event.pull_request.number }} --no-git-tag-version
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
@@ -50,10 +54,7 @@ jobs:
           git push origin HEAD:${{ github.head_ref }}
 
       - name: Publish Snapshot
-        if: env.SKIP_PUBLISH == 'false'
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          publish: npm run release:snapshot
+        id: publish
+        run: npm publish --scope=@${{ github.repository_owner }} --tag dev --provenance --registry https://github.com
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

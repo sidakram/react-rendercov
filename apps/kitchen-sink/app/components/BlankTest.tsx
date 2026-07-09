@@ -1,8 +1,11 @@
-
 function MemoText({ text }: { text: string }) {
-    return <><>{text}</></>;
+  return (
+    <>
+      <>{text}</>
+    </>
+  );
 }
 
-MemoText.displayName = 'MemoText';
+MemoText.displayName = "MemoText";
 
 export default MemoText;
