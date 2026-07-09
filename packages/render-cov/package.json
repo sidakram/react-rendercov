@@ -1,6 +1,6 @@
 {
-  "name": "@sidakram/react-rendercov",
-  "version": "0.4.0",
+  "name": "react-rendercov",
+  "version": "0.4.1-pr9.0",
   "description": "generate render coverage for react components using playwright",
   "keywords": [
     "playwright",
@@ -69,6 +69,6 @@
     "react-dom": ">=17.0.1"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/"
   }
 }

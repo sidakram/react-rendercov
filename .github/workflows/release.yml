@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-        contents: write
-        packages: write
-        id-token: write
+      contents: write
+      packages: write
+      id-token: write
 
     steps:
       - name: Checkout Code
@@ -38,8 +38,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@sidakram'
+          registry-url: "https://registry.npmjs.org"
+          scope: "@sidakram"
 
       - name: Generate .npmrc
         run: make create-npmrc
@@ -50,14 +50,14 @@ jobs:
 
       - name: Build Package
         if: env.SKIP_PUBLISH == 'false'
-        run: npm run build --workspace=@sidakram/react-rendercov
+        run: npm run build --workspace=react-rendercov
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
           git fetch origin main
           git rebase origin/main
-          npm version minor --workspace=@sidakram/react-rendercov
+          npm version minor --workspace=react-rendercov
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
@@ -70,6 +70,6 @@ jobs:
       - name: Publish to npm
         if: env.SKIP_PUBLISH == 'false'
         id: publish
-        run: npm publish --access public --provenance --workspace=@sidakram/react-rendercov --no-package-lock
+        run: npm publish --access public --provenance --workspace=react-rendercov --no-package-lock
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
