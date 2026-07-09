@@ -16,6 +16,10 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'publish')
     runs-on: ubuntu-latest
 
+    permissions:
+        contents: write
+        packages: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v6
@@ -37,16 +41,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@sidakram'
+
+      - name: Generate .npmrc
+        run: make create-npmrc
 
       - name: Install Dependencies
         if: env.SKIP_PUBLISH == 'false'
-        run: npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps
+        run: npm ci
+
+      - name: Build Package
+        if: env.SKIP_PUBLISH == 'false'
+        run: npm run build --workspace=@sidakram/react-rendercov
 
       - name: Version Bump
         if: env.SKIP_PUBLISH == 'false'
         run: |
-          git pull origin HEAD:${{ github.head_ref }} --rebase
-          npm version prerelease --preid=pr${{ github.event.pull_request.number }} --no-git-tag-version
+          git fetch origin ${{ github.head_ref }}
+          git rebase origin/${{ github.head_ref }}
+          npm version prerelease --preid=pr${{ github.event.pull_request.number }} --no-git-tag-version --workspace=@sidakram/react-rendercov
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
@@ -55,6 +69,6 @@ jobs:
 
       - name: Publish Snapshot
         id: publish
-        run: npm publish --scope=@${{ github.repository_owner }} --tag dev --provenance --registry https://github.com
+        run: npm publish --tag dev --no-package-lock --workspace=@sidakram/react-rendercov
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
